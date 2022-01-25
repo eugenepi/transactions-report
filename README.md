@@ -18,3 +18,6 @@ Deployment to Kubernetes:<br />
 As 3rd party exchange rate api was selected https://www.exchangerate-api.com/.<br />
 Reason to use their API is response that contains all available currencies to selected one.<br />
 It means we need to do just one request.<br />
+
+Swagger available:<br />
+http://host:port/swagger-ui/index.html#/transactions-controller/getAccountTransactionsUsingGET

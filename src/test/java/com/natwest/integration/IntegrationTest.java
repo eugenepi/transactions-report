@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.natwest.transactions.report.TransactionServiceApplication;
+import com.natwest.transactions.report.model.ErrorDto;
 import com.natwest.transactions.report.model.Transaction;
 import com.natwest.transactions.report.model.TransactionView;
 import com.natwest.transactions.report.repositories.TransactionRepository;
@@ -124,7 +125,7 @@ public class IntegrationTest extends DockerContainer {
     Assertions.assertEquals(
         "Can't build view. Reason is :com.natwest.transactions.report.exceptions.WrongPageNumberException:"
             + " Wrong page number. Possible page from 1 to 2",
-        mvcResult.getResponse().getContentAsString());
+        objectMapper.readValue(mvcResult.getResponse().getContentAsString(), ErrorDto.class).getMessage());
 
     // wrong iban
     mvcResult =
@@ -137,7 +138,7 @@ public class IntegrationTest extends DockerContainer {
     Assertions.assertEquals(
         "Can't build view. Reason is :com.natwest.transactions.report.exceptions.NoTransactionsException: "
             + "Can't find transactions for iban US897",
-        mvcResult.getResponse().getContentAsString());
+            objectMapper.readValue(mvcResult.getResponse().getContentAsString(), ErrorDto.class).getMessage());
 
     // wrong currency
     mvcResult =
@@ -150,7 +151,7 @@ public class IntegrationTest extends DockerContainer {
     Assertions.assertEquals(
         "Can't build view. Reason is :com.natwest.transactions.report.exceptions.ExchangeRateException:"
             + " Can't get result from Exchange rate service.",
-        mvcResult.getResponse().getContentAsString());
+            objectMapper.readValue(mvcResult.getResponse().getContentAsString(), ErrorDto.class).getMessage());
   }
 
   private List<Transaction> createTransactions() {
