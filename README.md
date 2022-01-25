@@ -1,20 +1,20 @@
-Run tests:
-    mvnw test
+Run tests:<br />
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mvnw test<br />
 
-Build project:
-    mvnw package
+Build project:<br />
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mvnw package<br />
 
-Build docker:
-    docker build -t transaction-service .
+Build docker:<br />
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; docker build -t transaction-service .<br />
 
-Run docker compose:
-    docker-compose up
+Run docker compose:<br />
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; docker-compose up<br />
 
-Deployment to Kubernetes:
-    kompose convert -f docker-compose.yml
-    kubectl apply .
+Deployment to Kubernetes:<br />
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; kompose convert -f docker-compose.yml<br />
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; kubectl apply .<br />
 
 
-As 3rd party exchange rate api was selected https://www.exchangerate-api.com/.
-Reason to use their API is response that contains all available currencies to selected one.
-It means we need to do just one request.
+As 3rd party exchange rate api was selected https://www.exchangerate-api.com/.<br />
+Reason to use their API is response that contains all available currencies to selected one.<br />
+It means we need to do just one request.<br />
