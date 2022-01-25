@@ -1,0 +1,38 @@
+server:
+  port : ${SERVER_PORT:8080}
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  jpa:
+    properties.hibernate:
+      dialect: org.hibernate.dialect.MariaDB103Dialect
+      jdbc.time_zone: UTC
+      jdbc.batch_size: 1000
+      order_inserts: true
+      #generate_statistics: true
+  datasource:
+    url: jdbc:mysql://${DB_URL}
+    driverClassName: org.mariadb.jdbc.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  kafka:
+    topic:  ${TOPIC}
+    consumer:
+      bootstrap-servers:  ${BROKER_URL}
+      group-id: transaction-consumer
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      max-poll-records: 1000
+      enable-auto-commit: false
+      fetch.min.bytes: 100000
+
+exchange_rate:
+  api_key: ${EXCHANGE_RATE_API_KEY:f5e3b2652bd77b7bfb957642}
